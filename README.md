@@ -50,19 +50,19 @@ Print script version and exit.
 You can find more examples on Wiki page, but I placed some cases here too.  
 - LLD of enclosures, controllers, virtual disks and physical disks:
 ```powershell
-PS C:\> .\Zbx-HPSmartArray.ps1 -action lld -part ctrl
+PS C:\> .\zbx-hpsmartarray.ps1 -action lld -part ctrl
 
 {"data":[{"{#VDISKNAME}":"vDisk01"},{"{#VDISKNAME}":"vDisk02"},"{#CTRL.SLOT}":"0"}]}
 ```
 - Request health status of one component. E.g. disk '2E:1:12':
 ```powershell
-PS C:\> .\Zbx-HPSmartArray.ps1 -action health -ctrlid 0 -part pd -identity 2E:1:12
+PS C:\> .\zbx-hpsmartarray.ps1 -action health -ctrlid 0 -part pd -identity 2E:1:12
 
 Rebuilding
 ```
 Or just using positional parameters:
 ```powershell
-PS C:\> .\Zbx-HPSmartArray.ps1 healthd 0 pd 2E:1:12
+PS C:\> .\zbx-hpsmartarray.ps1 healthd 0 pd 2E:1:12
 
 Rebuilding
 ```
