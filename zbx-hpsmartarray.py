@@ -48,6 +48,7 @@ import getopt
 import subprocess
 import re
 import json
+import os
 
 __author__ = "Thomas Hooge"
 __email__ = "thomas@hoogi.de"
