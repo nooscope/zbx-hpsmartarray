@@ -50,11 +50,12 @@ Param (
     [ValidateSet("lld","health")][Parameter(Position=0, Mandatory=$True)][string]$action,
     [ValidateSet("ctrl","ld","pd")][Parameter(Position=1, Mandatory=$True)][string]$part,
     [string][Parameter(Position=2, Mandatory=$False)]$ctrlid,
-    [string][Parameter(Position=3, Mandatory=$False)]$partid
+    [string][Parameter(Position=3, Mandatory=$False)]$partid,
+    [Parameter(Mandatory=$False)][switch]$Pretty
 )
 
 # Script version
-$VERSION_NUM="0.4.6"
+$VERSION_NUM="0.4.7"
 if ($version) {
     Write-Host $VERSION_NUM
     break
@@ -114,7 +115,7 @@ function Make-LLD() {
                     $all_pd = & "$ssacli" "ctrl slot=$($ctrl_slot) pd all show status".Split() | Where-Object {$_ -match "physicaldrive"}
                     
                     foreach ($pd in $all_pd) {
-                        if ($pd -match "physicaldrive (?<Num>\d{1,}\w(:?\d){1,2}) \(.+ (?<Capacity>\d{1,} [KGT]B?)\)") {
+                        if ($pd -match "physicaldrive (?<Num>\d{1,}\w(:\d{1,2}){1,2}) \(.+ (?<Capacity>\d{1,} [KGT]B?)\)") {
                             [array]$lld_obj_list += [psobject]@{"{#PD.NUM}" = $Matches.Num;
                                                                 "{#PD.CAPACITY}" = $Matches.Capacity;
                                                                 "{#CTRL.SLOT}" = $ctrl_slot;
@@ -126,7 +127,11 @@ function Make-LLD() {
             }
         }
     }
-    return ConvertTo-Json @{"data" = $lld_obj_list} -Compress
+    if ($Pretty) {
+        return ConvertTo-Json @{"data" = $lld_obj_list}
+    } else {
+        return ConvertTo-Json @{"data" = $lld_obj_list} -Compress
+    }
 }
 
 function Get-Health() {
