@@ -46,16 +46,16 @@
 #>
 
 Param (
-    [switch]$version = $False,
-    [ValidateSet("lld","health")][Parameter(Position=0, Mandatory=$True)][string]$action,
-    [ValidateSet("ctrl","ld","pd")][Parameter(Position=1, Mandatory=$True)][string]$part,
-    [string][Parameter(Position=2, Mandatory=$False)]$ctrlid,
-    [string][Parameter(Position=3, Mandatory=$False)]$partid,
+    [Parameter(Mandatory=$False)][switch]$version = $False,
+    [ValidateSet("lld","health")][Parameter(Position=0, Mandatory=$False)][string]$action,
+    [ValidateSet("ctrl","ld","pd")][Parameter(Position=1, Mandatory=$False)][string]$part,
+    [Parameter(Position=2, Mandatory=$False)][string]$ctrlid,
+    [Parameter(Position=3, Mandatory=$False)][string]$partid,
     [Parameter(Mandatory=$False)][switch]$Pretty
 )
 
 # Script version
-$VERSION_NUM="0.4.7"
+$VERSION_NUM="0.4.8"
 if ($version) {
     Write-Host $VERSION_NUM
     break
