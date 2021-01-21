@@ -33,12 +33,24 @@ $ ./zbx-hpsmartarray.py -a lld -p ctrl
 "{#CTRL.SLOT}": "1"}, {"{#CTRL.MODEL}": "Smart Array P440ar", "{#CTRL.SN}": 
 "PDNLH0********", "{#CTRL.SLOT}": "0"}]}
 
-Example 2: Health of logical drive
+Example 2: List logical drives on controller 0
+$ ./zbx-hpsmartarray.py -a lld -p ld -c 0
+{"data": [{"{#LD.NUM}": "1", "{#LD_CAPACITY}": "838.33 GB",
+"{#LD_RAID}": "RAID 1", "{#CTRL.SLOT}": "0", "{#CTRL_SN}": "PDNLH0********"}]}
+
+Example 3: Health of logical drive 1 on controller 0
 $ ./zbx-hpsmartarray.py -a health -p ld -c 0 -i 1
 OK
 
-Example 3: Health of physical drive 
-$ ./zbx-hpsmartarray.py -a lld -p pd -c 
+Example 4: List physical drives on controller 0
+$ ./zbx-hpsmartarray.py -a lld -p pd -c 0
+{"data": [{"{#PD.NUM}": "1I:1:1", "{#PD_CAPACITY}": "900 GB",
+"{#CTRL.SLOT}": "0", "{#CTRL_SN}": "PDNLH0********"},
+{"{#PD.NUM}": "1I:1:2", "{#PD_CAPACITY}": "900 GB",
+"{#CTRL.SLOT}": "0", "{#CTRL_SN}": "PDNLH0********"}]}
+
+Example 5: Health of physical drive 1I:1:1 on controller 0
+$ ./zbx-hpsmartarray.py -a health -p pd -c 0 -i 1I:1:1
 OK
 
 """
