@@ -93,7 +93,7 @@ def get_pdinfo(pd):
     except:
         return None, None
     try:
-        capacity = re.search("(\d+ [KGT]B?)\)", pd).group(1)
+        capacity = re.search("(\d+ [KGT]B?)[),]", pd).group(1)
     except:
         capacity = "UNKNOWN"
     return num, capacity
